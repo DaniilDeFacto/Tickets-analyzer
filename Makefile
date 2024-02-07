@@ -12,8 +12,8 @@ build:
 install:
 	./gradlew clean install
 
-#run-dist:
-#	./build/install/java-package/bin/java-package
+run-dist:
+	./build/install/Tickets-analyzer/bin/Tickets-analyzer
 
 run:
 	./gradlew run
@@ -21,15 +21,8 @@ run:
 test:
 	./gradlew test
 
-#report:
-#	./gradlew jacocoTestReport
-
 lint:
 	./gradlew checkstyleMain checkstyleTest
-
-check-deps:
-	./gradlew dependencyUpdates -Drevision=release
-
 
 build-run: build run
 
