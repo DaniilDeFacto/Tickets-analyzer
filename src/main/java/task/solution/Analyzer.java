@@ -9,15 +9,16 @@ import java.util.stream.Stream;
 
 public class Analyzer {
     public static Map<String, Duration> findMinFlightTimes(List<Ticket> tickets, String origin, String destination) {
+        tickets = tickets.stream()
+                .filter(ticket -> ticket.getOrigin().equals(origin) && ticket.getDestination().equals(destination))
+                .collect(Collectors.toList());
         Map<String, Duration> minFlightTimes = new HashMap<>();
         for (Ticket ticket : tickets) {
-            if (ticket.getOrigin().equals(origin) && ticket.getDestination().equals(destination)) {
-                var carrier = ticket.getCarrier();
-                var flightDuration = Duration.between(ticket.getDepartureDateTime(), ticket.getArrivalDateTime());
-                var currentMinDuration = minFlightTimes.getOrDefault(carrier, Duration.ofDays(365));
-                if (flightDuration.compareTo(currentMinDuration) < 0) {
-                    minFlightTimes.put(carrier, flightDuration);
-                }
+            var carrier = ticket.getCarrier();
+            var flightDuration = Duration.between(ticket.getDepartureDateTime(), ticket.getArrivalDateTime());
+            var currentMinDuration = minFlightTimes.getOrDefault(carrier, Duration.ofDays(365));
+            if (flightDuration.compareTo(currentMinDuration) < 0) {
+                minFlightTimes.put(carrier, flightDuration);
             }
         }
         return minFlightTimes;
