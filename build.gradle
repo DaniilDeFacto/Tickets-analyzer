@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'test.tasks'
@@ -26,9 +27,15 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
 
     testImplementation platform('org.junit:junit-bom:5.9.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
