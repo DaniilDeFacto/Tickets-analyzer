@@ -4,11 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 @Getter
 @Setter
 public class Ticket {
@@ -40,20 +35,20 @@ public class Ticket {
 
     private double price;
 
-    public ZonedDateTime getDepartureDateTime() {
-        var dateTimeStr = departureDate + " " + departureTime;
-        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
-        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-        var zoneId = ZoneId.of(TimeZone.IDS.get(originName));
-        return dateTime.atZone(zoneId);
-    }
-
-    public ZonedDateTime getArrivalDateTime() {
-        var dateTimeStr = arrivalDate + " " + arrivalTime;
-        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
-        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-        var zoneId = ZoneId.of(TimeZone.IDS.get(destinationName));
-        return dateTime.atZone(zoneId);
-    }
+//    public ZonedDateTime getDepartureDateTime() {
+//        var dateTimeStr = departureDate + " " + departureTime;
+//        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
+//        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+//        var zoneId = ZoneId.of(TimeZone.IDS.get(originName));
+//        return dateTime.atZone(zoneId);
+//    }
+//
+//    public ZonedDateTime getArrivalDateTime() {
+//        var dateTimeStr = arrivalDate + " " + arrivalTime;
+//        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
+//        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+//        var zoneId = ZoneId.of(TimeZone.IDS.get(destinationName));
+//        return dateTime.atZone(zoneId);
+//    }
 }
 

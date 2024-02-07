@@ -1,6 +1,10 @@
 package task.solution;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,19 +13,30 @@ import java.util.stream.Stream;
 
 public class Analyzer {
     public static Map<String, Duration> findMinFlightTimes(List<Ticket> tickets, String origin, String destination) {
-        tickets = tickets.stream()
-                .filter(ticket -> ticket.getOrigin().equals(origin) && ticket.getDestination().equals(destination))
-                .collect(Collectors.toList());
         Map<String, Duration> minFlightTimes = new HashMap<>();
         for (Ticket ticket : tickets) {
-            var carrier = ticket.getCarrier();
-            var flightDuration = Duration.between(ticket.getDepartureDateTime(), ticket.getArrivalDateTime());
-            var currentMinDuration = minFlightTimes.getOrDefault(carrier, Duration.ofDays(365));
-            if (flightDuration.compareTo(currentMinDuration) < 0) {
-                minFlightTimes.put(carrier, flightDuration);
+            if (ticket.getOrigin().equals(origin) && ticket.getDestination().equals(destination)) {
+                var carrier = ticket.getCarrier();
+                var departureDateTime = getDateTime(ticket.getOriginName(),
+                        ticket.getDepartureDate(), ticket.getDepartureTime());
+                var arrivalDateTime = getDateTime(ticket.getDestinationName(),
+                        ticket.getArrivalDate(), ticket.getArrivalTime());
+                var flightDuration = Duration.between(departureDateTime, arrivalDateTime);
+                var currentMinDuration = minFlightTimes.getOrDefault(carrier, Duration.ofDays(365));
+                if (flightDuration.compareTo(currentMinDuration) < 0) {
+                    minFlightTimes.put(carrier, flightDuration);
+                }
             }
         }
         return minFlightTimes;
+    }
+
+    public static ZonedDateTime getDateTime(String name, String date, String time) {
+        var dateTimeStr = date + " " + time;
+        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
+        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+        var zoneId = ZoneId.of(TimeZone.IDS.get(name));
+        return dateTime.atZone(zoneId);
     }
 
     public static double calculatePriceDifference(List<Ticket> tickets, String origin, String destination) {
