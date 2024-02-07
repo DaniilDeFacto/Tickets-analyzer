@@ -1,4 +1,4 @@
-package test.task;
+package task.solution;
 
 import java.time.Duration;
 import java.util.List;

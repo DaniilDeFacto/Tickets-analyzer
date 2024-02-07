@@ -1,4 +1,4 @@
-package test.task;
+package task.solution;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

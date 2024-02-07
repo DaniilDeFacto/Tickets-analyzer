@@ -1,4 +1,4 @@
-package test.task;
+package task.solution;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
