@@ -34,21 +34,5 @@ public class Ticket {
     private int stops;
 
     private double price;
-
-//    public ZonedDateTime getDepartureDateTime() {
-//        var dateTimeStr = departureDate + " " + departureTime;
-//        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
-//        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-//        var zoneId = ZoneId.of(TimeZone.IDS.get(originName));
-//        return dateTime.atZone(zoneId);
-//    }
-//
-//    public ZonedDateTime getArrivalDateTime() {
-//        var dateTimeStr = arrivalDate + " " + arrivalTime;
-//        var formatter = DateTimeFormatter.ofPattern("dd.MM.yy H:mm");
-//        var dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-//        var zoneId = ZoneId.of(TimeZone.IDS.get(destinationName));
-//        return dateTime.atZone(zoneId);
-//    }
 }
 
